@@ -79,6 +79,51 @@ python main.py \
 | LIKELY | 0.5–0.85 | 有证据，但仅按姓名匹配 |
 | UNCERTAIN | < 0.5 | 弱提及/任职信息，或无证据 |
 
+### 输出样例
+
+Markdown 报告（`report.md`，来自 `python main.py --demo`）：
+
+> # Co-authors of Alex Researcher at ECCV 2026
+>
+> **Summary:** 1 CONFIRMED, 2 LIKELY, 1 UNCERTAIN out of 4 co-authors.
+>
+> | Co-author | Profile / URL | Status | Confidence | Evidence | Snippet |
+> |-----------|---------------|--------|-----------|----------|---------|
+> | Jane Doe | [link](#) | CONFIRMED | 0.93 | scholar_pub | Neural Field Rendering for Dynamic Scenes. ECCV 2026 (European Conference on Computer Vision). |
+> | Wei Zhang<br/>suspects: Wei Zhang (Example University), Wei Zhang (Other Institute of Technology) | [link](#) | LIKELY | 0.74 | homepage | News: Our paper was accepted to ECCV 2026! See you in Milan. |
+> | John Smith | - | LIKELY | 0.62 | arxiv | Comments: Accepted to ECCV 2026. 14 pages, 8 figures. |
+> | Maria Garcia | [link](#) | UNCERTAIN | 0.20 | - | - |
+
+对应的 JSON（`report.json`，展示其中一条结果）：
+
+```json
+{
+  "target": { "name": "Alex Researcher", "scholar_id": "DEMO1234" },
+  "conference": { "acronym": "ECCV", "year": 2026 },
+  "summary": { "confirmed": 1, "likely": 2, "uncertain": 1, "total_coauthors": 4 },
+  "results": [
+    {
+      "coauthor_name": "Jane Doe",
+      "url": "https://scholar.google.com/citations?user=JANE9999",
+      "status": "CONFIRMED",
+      "confidence": 0.93,
+      "evidence": [
+        {
+          "source": "scholar_pub",
+          "url": "https://scholar.google.com/citations?user=JANE9999",
+          "snippet": "Neural Field Rendering for Dynamic Scenes. ECCV 2026 (European Conference on Computer Vision).",
+          "raw_score": 1.0
+        }
+      ],
+      "suspected_names": [],
+      "note": null
+    }
+  ]
+}
+```
+
+完整样例见：[`samples/report.md`](samples/report.md)、[`samples/report.json`](samples/report.json)。
+
 ## 注意
 
 SerpAPI 的 `google_scholar_profiles` 接口已停用，该后端无法按姓名解析合作者主页，故匹配最高停留在 LIKELY（“仅姓名”）。任何匹配都必须附带证据片段，不会在无证据的情况下下结论。
