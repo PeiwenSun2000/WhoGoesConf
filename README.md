@@ -1,8 +1,12 @@
-# Conference Co-author Overlap Finder
+# WhoGoesConf
 
 English | [中文](README.zh.md)
 
-A CLI tool that, given a researcher's Google Scholar profile and a target conference (e.g. `ECCV 2026`), finds which of their co-authors *also* have a paper at that conference. It mines co-authors from the profile and recent papers, recovers full names via arXiv, then gathers acceptance evidence from multiple sources and scores each match with a confidence tier.
+**Who from your circle is also going to the conference?**
+
+WhoGoesConf takes a researcher's Google Scholar profile and a target conference (e.g. `ECCV 2026`) and tells you which of their co-authors *also* have a paper accepted there — so you know whose poster to visit and who to grab coffee with in the hallway track.
+
+Under the hood it mines co-authors from the profile *and* recent papers (the Scholar sidebar is famously incomplete), recovers full names via arXiv (Scholar loves shortening "Zhen Ye" to "Z Ye"), then hunts for acceptance evidence across Scholar publications, personal homepages, arXiv, and the open web. Every verdict comes with a confidence tier and a quotable evidence snippet — it never claims a match it can't back up.
 
 ## Features
 
