@@ -325,9 +325,9 @@ class CoAuthorExtractor:
     def _merge_abbreviated(self, merged: Dict[str, CoAuthor]) -> None:
         """Fold abbreviated entries into full-name ones when they clearly match.
 
-        E.g. "Z Ye" (from a paper not found on arXiv) is merged into "Zhen Ye"
-        (recovered via arXiv). Skips merges that are ambiguous (more than one
-        full-name candidate matches).
+        E.g. "J. Doe" (from a paper not found on arXiv) is merged into
+        "Jane Doe" (recovered via arXiv). Skips merges that are ambiguous (more
+        than one full-name candidate matches).
         """
         full = [c for c in merged.values() if not _is_abbreviated(c.normalized_name)]
         if not full:

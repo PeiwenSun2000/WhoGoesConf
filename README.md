@@ -6,7 +6,7 @@ English | [中文](README.zh.md)
 
 WhoGoesConf takes a researcher's Google Scholar profile and a target conference (e.g. `ECCV 2026`) and tells you which of their co-authors *also* have a paper accepted there — so you know whose poster to visit and who to grab coffee with in the hallway track.
 
-Under the hood it mines co-authors from the profile *and* recent papers (the Scholar sidebar is famously incomplete), recovers full names via arXiv (Scholar loves shortening "Zhen Ye" to "Z Ye"), then hunts for acceptance evidence across Scholar publications, personal homepages, arXiv, and the open web. Every verdict comes with a confidence tier and a quotable evidence snippet — it never claims a match it can't back up.
+Under the hood it mines co-authors from the profile *and* recent papers (the Scholar sidebar is famously incomplete), recovers full names via arXiv (Scholar often shows only initials, e.g. `J. Doe` instead of `Jane Doe`), then hunts for acceptance evidence across Scholar publications, personal homepages, arXiv, and the open web. Every verdict comes with a confidence tier and a quotable evidence snippet — it never claims a match it can't back up.
 
 ## Features
 
