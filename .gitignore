@@ -1,0 +1,28 @@
+# --- Secrets / privacy ---
+.env
+*.key
+*.pem
+
+# --- Local cache of scraped responses (contains query data) ---
+cache/
+
+# --- Generated results (root only; keep samples/ demo files tracked) ---
+/report.json
+/report.md
+/report*.json
+/report*.md
+/SUMMARY.md
+*.log
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
