@@ -1,18 +1,18 @@
-# WhoGoesConf
+# 🎓 WhoGoesConf
 
 [English](README.md) | 中文
 
-**你的圈子里，还有谁也要去这个会议？**
+> ☕ **你的圈子里，还有谁也要去这个会议？**
 
-WhoGoesConf 接收某位研究者的 Google Scholar 主页和目标会议（如 `ECCV 2026`），告诉你他/她的哪些合作者*同样*在该会议上有论文被接收——这样你就知道该去看谁的 poster、在茶歇时找谁聊天了。
+要去参加一个大会，却好奇哪些合作者也会出现在同一个会场？🤔 把某位研究者的 Google Scholar 主页和目标会议（如 `ECCV 2026`）交给 WhoGoesConf，它就会告诉你：他/她的哪些合作者*同样*在该会议上有论文被接收——这样你就知道该去看谁的 poster 🪧、茶歇时找谁聊天了。
 
-它的工作原理：先从主页*和*近期论文中提取合作者（Scholar 侧边栏出了名的不全），再借助 arXiv 补全全名（Scholar 常常只显示首字母缩写，例如把全名显示为 `J. Doe`），随后在 Scholar 论文、个人主页、arXiv 与公开网页中搜寻“被接收”的证据。每个结论都附带置信度分级与可引用的证据片段——绝不给出无法佐证的匹配。
+🔍 工作原理：先从主页*和*近期论文里挖出合作者（Scholar 侧边栏出了名的不全 🙈），再借助 arXiv 补全全名（Scholar 总爱只显示首字母缩写，比如把全名缩成 `J. Doe`），随后在 Scholar 论文、个人主页、arXiv 和公开网页里搜寻“被接收”的证据。每个结论都附带置信度分级和可引用的证据片段 🧾——绝不给出无法佐证的匹配。
 
-## 功能
+## ✨ 功能
 
-可插拔后端（`scholarly` / SerpAPI）、反封锁（代理、随机延时、指数退避）、arXiv 全名补全、多来源证据（Scholar 论文、个人主页、arXiv、网页搜索）、严格的“缩写+年份”匹配、身份消歧、JSON + Markdown 报告，以及强缓存。
+可插拔后端（`scholarly` / SerpAPI）🔌、反封锁（代理、随机延时、指数退避）🛡️、arXiv 全名补全 📛、多来源证据（Scholar 论文、个人主页、arXiv、网页搜索）🌐、严格的“缩写+年份”匹配 🎯、身份消歧 🕵️、JSON + Markdown 报告 📊，以及强缓存 ⚡。
 
-## 模块结构
+## 🧩 模块结构
 
 | 模块 | 职责 |
 |------|------|
@@ -23,7 +23,7 @@ WhoGoesConf 接收某位研究者的 Google Scholar 主页和目标会议（如 
 | `main.py` | 命令行、编排、缓存、报告 |
 | `models.py`、`normalize.py` | 公共数据结构与姓名工具 |
 
-## 环境构建
+## 🚀 环境构建
 
 需要 **Python 3.9+**。
 
@@ -33,15 +33,15 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-**SerpAPI（推荐）** —— 谷歌学术会强力封锁爬虫。使用 SerpAPI 密钥可绕过验证码，是最稳定的后端。
+**SerpAPI（推荐）** 💡 —— 谷歌学术特别爱给爬虫弹验证码。用 SerpAPI 密钥可以轻松绕过，是最稳定的后端。
 
 ```bash
 export SERPAPI_KEY="your_key_here"     # 或写入 .env 文件
 ```
 
-> `.env`、`cache/` 与生成的报告均已被 git 忽略，请勿提交 API 密钥。
+> 🔒 `.env`、`cache/` 与生成的报告均已被 git 忽略，千万别提交你的 API 密钥！
 
-## 使用
+## 🕹️ 使用
 
 用模拟数据预览输出格式（无需联网）：
 
@@ -57,7 +57,7 @@ python main.py \
   --conference "ECCV 2026" --backend serpapi
 ```
 
-常用参数：
+🎛️ 常用参数：
 
 | 参数 | 默认值 | 说明 |
 |------|--------|------|
@@ -70,10 +70,10 @@ python main.py \
 | `--proxy` / `--free-proxies` | — | 代理选项（scholarly 后端） |
 | `--no-cache` | 关闭 | 不使用本地缓存 |
 
-## 输出
+## 📦 输出
 
-- `report.json` —— 结构化结果
-- `report.md` —— Markdown 表格
+- `report.json` 🧱 —— 结构化结果
+- `report.md` 📋 —— Markdown 表格
 
 `report.md` 示例（来自 `--demo`）：
 
@@ -89,14 +89,14 @@ python main.py \
 
 *备注：* **Wei Zhang** —— 存在 2 个同名 Scholar 主页，身份不确定；**John Smith** —— 未解析到 Scholar 主页，仅按姓名匹配；**Maria Garcia** —— 任何来源都未找到 ECCV 2026 的证据，会议可能尚未被收录。
 
-置信度分级：
+🎚️ 置信度分级：
 
 | 状态 | 分数 | 含义 |
 |------|------|------|
-| CONFIRMED | ≥ 0.85 | 唯一主页 + 明确证据 |
-| LIKELY | 0.5–0.85 | 有证据，但仅按姓名匹配 |
-| UNCERTAIN | < 0.5 | 弱提及/任职信息，或无证据 |
+| ✅ CONFIRMED | ≥ 0.85 | 唯一主页 + 明确证据 |
+| 🟡 LIKELY | 0.5–0.85 | 有证据，但仅按姓名匹配 |
+| ❓ UNCERTAIN | < 0.5 | 弱提及/任职信息，或无证据 |
 
-## 注意
+## ⚠️ 注意
 
-SerpAPI 的 `google_scholar_profiles` 接口已停用，该后端无法按姓名解析合作者主页，故匹配最高停留在 LIKELY（“仅姓名”）。任何匹配都必须附带证据片段，不会在无证据的情况下下结论。
+SerpAPI 的 `google_scholar_profiles` 接口已停用，该后端无法按姓名解析合作者主页，故匹配最高停留在 🟡 LIKELY（“仅姓名”）。另外别忘了：任何匹配都必须附带证据片段 🧾，绝不会在没有证据的情况下下结论。

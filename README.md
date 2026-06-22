@@ -1,18 +1,18 @@
-# WhoGoesConf
+# 🎓 WhoGoesConf
 
 English | [中文](README.zh.md)
 
-**Who from your circle is also going to the conference?**
+> ☕ **Who from your circle is also going to the conference?**
 
-WhoGoesConf takes a researcher's Google Scholar profile and a target conference (e.g. `ECCV 2026`) and tells you which of their co-authors *also* have a paper accepted there — so you know whose poster to visit and who to grab coffee with in the hallway track.
+Heading to a big conference and wondering which of your collaborators will be in the same room? 🤔 Hand WhoGoesConf a researcher's Google Scholar profile and a target conference (say, `ECCV 2026`), and it tells you which of their co-authors *also* got a paper accepted there — so you know whose poster to swing by 🪧 and who to grab coffee with in the hallway track.
 
-Under the hood it mines co-authors from the profile *and* recent papers (the Scholar sidebar is famously incomplete), recovers full names via arXiv (Scholar often shows only initials, e.g. `J. Doe` instead of `Jane Doe`), then hunts for acceptance evidence across Scholar publications, personal homepages, arXiv, and the open web. Every verdict comes with a confidence tier and a quotable evidence snippet — it never claims a match it can't back up.
+🔍 Under the hood it mines co-authors from the profile *and* recent papers (the Scholar sidebar is famously incomplete 🙈), recovers full names via arXiv (Scholar loves to show just initials, e.g. `J. Doe` instead of `Jane Doe`), then hunts for "accepted!" evidence across Scholar publications, personal homepages, arXiv, and the open web. Every verdict ships with a confidence tier and a quotable snippet 🧾 — it never claims a match it can't back up.
 
-## Features
+## ✨ Features
 
-Pluggable backends (`scholarly` / SerpAPI), anti-blocking (proxies, randomized delays, exponential backoff), arXiv full-name recovery, multi-source evidence (Scholar pubs, homepage, arXiv, web search), strict acronym+year matching, identity disambiguation, JSON + Markdown reports, and aggressive caching.
+Pluggable backends (`scholarly` / SerpAPI) 🔌, anti-blocking (proxies, randomized delays, exponential backoff) 🛡️, arXiv full-name recovery 📛, multi-source evidence (Scholar pubs, homepage, arXiv, web search) 🌐, strict acronym+year matching 🎯, identity disambiguation 🕵️, JSON + Markdown reports 📊, and aggressive caching ⚡.
 
-## Architecture
+## 🧩 Architecture
 
 | Module | Role |
 |--------|------|
@@ -23,7 +23,7 @@ Pluggable backends (`scholarly` / SerpAPI), anti-blocking (proxies, randomized d
 | `main.py` | CLI, orchestration, caching, reporting |
 | `models.py`, `normalize.py` | Shared models & name helpers |
 
-## Setup
+## 🚀 Setup
 
 Requires **Python 3.9+**.
 
@@ -33,17 +33,17 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-**SerpAPI (recommended)** — Google Scholar aggressively blocks bots. A SerpAPI key avoids CAPTCHAs and is the most reliable backend.
+**SerpAPI (recommended)** 💡 — Google Scholar loves to throw CAPTCHAs at bots. A SerpAPI key sidesteps them and is by far the most reliable backend.
 
 ```bash
 export SERPAPI_KEY="your_key_here"     # or put it in a .env file
 ```
 
-> `.env`, `cache/`, and generated reports are git-ignored. Never commit your API key.
+> 🔒 `.env`, `cache/`, and generated reports are git-ignored. Never commit your API key!
 
-## Usage
+## 🕹️ Usage
 
-Preview the output format with mock data (no network):
+Preview the output format with mock data (no network needed):
 
 ```bash
 python main.py --demo
@@ -57,7 +57,7 @@ python main.py \
   --conference "ECCV 2026" --backend serpapi
 ```
 
-Key flags:
+🎛️ Key flags:
 
 | Flag | Default | Description |
 |------|---------|-------------|
@@ -70,10 +70,10 @@ Key flags:
 | `--proxy` / `--free-proxies` | — | Proxy options (scholarly backend) |
 | `--no-cache` | off | Bypass local cache |
 
-## Output
+## 📦 Output
 
-- `report.json` — structured results
-- `report.md` — Markdown table
+- `report.json` 🧱 — structured results
+- `report.md` 📋 — Markdown table
 
 Example `report.md` (from `--demo`):
 
@@ -89,14 +89,14 @@ Example `report.md` (from `--demo`):
 
 *Notes:* **Wei Zhang** — 2 same-name Scholar profiles, identity ambiguous; **John Smith** — no Scholar profile resolved, matched by name only; **Maria Garcia** — no evidence of ECCV 2026 found in any source, the conference may not be indexed yet.
 
-Confidence tiers:
+🎚️ Confidence tiers:
 
 | Status | Score | Meaning |
 |--------|-------|---------|
-| CONFIRMED | ≥ 0.85 | Unique profile + explicit evidence |
-| LIKELY | 0.5–0.85 | Evidence found, identity name-only |
-| UNCERTAIN | < 0.5 | Weak/role mention or no evidence |
+| ✅ CONFIRMED | ≥ 0.85 | Unique profile + explicit evidence |
+| 🟡 LIKELY | 0.5–0.85 | Evidence found, identity name-only |
+| ❓ UNCERTAIN | < 0.5 | Weak/role mention or no evidence |
 
-## Notes
+## ⚠️ Notes
 
-SerpAPI's `google_scholar_profiles` engine is discontinued, so co-author profiles can't be resolved by name on that backend — matches stay LIKELY ("name only"). A match is never reported without an evidence snippet.
+SerpAPI's `google_scholar_profiles` engine is discontinued, so co-author profiles can't be resolved by name on that backend — matches stay 🟡 LIKELY ("name only"). And remember: a match is *never* reported without an evidence snippet. 🧾
